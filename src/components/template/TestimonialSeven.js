@@ -2,12 +2,15 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
 import Slider from "react-slick";
+import { Autoplay } from "swiper";
 const TestimonialSeven = () => {
   const settings = {
     dots: true,
     arrows: false,
     infinite: true,
     speed: 1000,
+    autoplay: true,
+    autoplaySpeed: 8000,
     slidesToShow: 2,
     slidesToScroll: 2,
     initialSlide: 0,
@@ -83,11 +86,15 @@ const TestimonialSeven = () => {
                           alt="img"
                         />
                         <p className="designation mb-0 text-white">
-                          Let us be a part of your personal and professional
-                          growth by providing effective way to learn.Let us be a
-                          of your growth by a fun and effective way.
+                          We recently integrated Raven's sprayer kits into our
+                          equipment lineup, thanks to Coastal PASS. The
+                          precision application control has allowed us to reduce
+                          chemical use and achieve better crop coverage. The
+                          support team was quick to assist with installation and
+                          training, ensuring we got the most out of this
+                          advanced technology.
                         </p>
-                        <h6 className="mb-0 mt-3">Devon Lane</h6>
+                        <h6 className="mb-0 mt-3">John D. - Farm Manager</h6>
                         <div className="ratting-inner mt-3">
                           <FaStar />
                           <FaStar />
@@ -123,11 +130,15 @@ const TestimonialSeven = () => {
                           alt="img"
                         />
                         <p className="designation mb-0 text-white">
-                          Let us be a part of your personal and professional
-                          growth by providing effective way to learn.Let us be a
-                          of your growth by a fun and effective way.
+                          The field leveling and water management systems from
+                          PTX Trimble, provided by [Your Company Name], have
+                          revolutionized our irrigation efficiency. The
+                          precision and accuracy of their technology have
+                          significantly improved our water distribution,
+                          resulting in healthier crops and reduced water usage.
+                          Their expertise and support have been invaluable.
                         </p>
-                        <h6 className="mb-0 mt-3">Devon Lane</h6>
+                        <h6 className="mb-0 mt-3">John D. - Farm Manager</h6>
                         <div className="ratting-inner mt-3">
                           <FaStar />
                           <FaStar />
@@ -163,11 +174,16 @@ const TestimonialSeven = () => {
                           alt="img"
                         />
                         <p className="designation mb-0 text-white">
-                          Let us be a part of your personal and professional
-                          growth by providing effective way to learn.Let us be a
-                          of your growth by a fun and effective way.
+                          As an early beta tester of AgSupport, we've seen
+                          firsthand how it streamlines our service operations.
+                          The platform's intuitive interface and robust features
+                          have made scheduling and managing services much
+                          easier. The fleet management capabilities are a huge
+                          bonus, helping us track and maintain our equipment
+                          efficiently. This tool is a game-changer for our
+                          dealership.
                         </p>
-                        <h6 className="mb-0 mt-3">Devon Lane</h6>
+                        <h6 className="mb-0 mt-3">Mike R. - Coastal Tractor</h6>
                         <div className="ratting-inner mt-3">
                           <FaStar />
                           <FaStar />
@@ -203,11 +219,17 @@ const TestimonialSeven = () => {
                           alt="img"
                         />
                         <p className="designation mb-0 text-white">
-                          Let us be a part of your personal and professional
-                          growth by providing effective way to learn.Let us be a
-                          of your growth by a fun and effective way.
+                          Participating in the beta testing of AgSupport has
+                          been a rewarding experience. The system's capabilities
+                          in managing our fleet and scheduling services are
+                          unparalleled. It's clear that Coastal PASS understands
+                          the needs of the agricultural industry and delivers
+                          solutions that enhance operational efficiency and
+                          customer satisfaction.
                         </p>
-                        <h6 className="mb-0 mt-3">Devon Lane</h6>
+                        <h6 className="mb-0 mt-3">
+                          Devon L. - Ag Service Company
+                        </h6>
                         <div className="ratting-inner mt-3">
                           <FaStar />
                           <FaStar />
