@@ -12,7 +12,7 @@ const WhyChoose = () => {
                 High-Tech Advantage, With Old Fashioned Service
               </h2>
             </div>
-            <div className="col-xl-6 col-lg-7 offset-xl-1 align-self-end">
+            <div className="col-xl-6 col-lg-7 offset-xl-1 align-self-end no-break">
               <p className="content">
                 Our commitment to quality and reliability has made us a trusted
                 partner for farmers and agricultural businesses. We pride
@@ -30,7 +30,7 @@ const WhyChoose = () => {
             <div className="why-choose-us-list mb-3 mt-4 mt-lg-0">
               <div className="media">
                 <h4 className="count">01</h4>
-                <div className="media-left me-4 align-self-center">
+                <div className="media-left me-4 align-self-center no-break">
                   <img src="assets/img/home-7/7.png" alt="img" />
                 </div>
                 <div className="media-body">
@@ -45,7 +45,7 @@ const WhyChoose = () => {
             <div className="why-choose-us-list mb-3">
               <div className="media">
                 <h4 className="count color-base">02</h4>
-                <div className="media-left me-4 align-self-center">
+                <div className="media-left me-4 align-self-center no-break">
                   <img src="assets/img/home-7/7.png" alt="img" />
                 </div>
                 <div className="media-body">
@@ -60,7 +60,7 @@ const WhyChoose = () => {
             <div className="why-choose-us-list">
               <div className="media">
                 <h4 className="count">03</h4>
-                <div className="media-left me-4 align-self-center">
+                <div className="media-left me-4 align-self-center no-break">
                   <img src="assets/img/home-7/7.png" alt="img" />
                 </div>
                 <div className="media-body">
