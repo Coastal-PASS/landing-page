@@ -166,10 +166,13 @@
   position: relative;
   transition: 0.4s;
   margin-bottom: 30px;
+  height: 250px;
+  word-break: keep-all;
+  overflow-wrap: normal;
   .thumb {
     display: inline-block;
     border-radius: 50%;
-    border: 1px solid #50af9b;
+    border: 1px solid #0c2c94;
     text-align: center;
     position: absolute;
     top: 50%;
@@ -203,7 +206,7 @@
     }
   }
   &:hover {
-    background: #50af9b;
+    background: #3c547c;
     .thumb {
       border: 1px solid #fff;
     }
@@ -218,11 +221,12 @@
   }
 }
 .bg-blue-right {
-  background: rgba(80, 175, 155, 0.1);
+  background: rgba(66, 107, 240, 0.1);
 }
 .service-middle-section {
-  padding: 30px 30px 0 30px;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 125px;
+  padding-bottom: auto;
+  height: auto;
 }

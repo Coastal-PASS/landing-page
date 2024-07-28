@@ -48,7 +48,7 @@ const TestimonialSeven = () => {
       {/* testimonial-area start */}
       <div
         className="testimonial-area testimonial-area_6 bg-cover pd-top-60 pd-bottom-120"
-        style={{ backgroundColor: "#2B2B5E" }}
+        style={{ backgroundColor: "#3c547c" }}
       >
         <div className="container pd-top-120">
           <div className="row justify-content-center">

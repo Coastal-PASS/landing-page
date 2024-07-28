@@ -4,7 +4,7 @@ import ContactAreaSix from "@/components/template/ContactAreaSix";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import ProjectAreaThree from "@/components/template/ProjectAreaThree";
-import ServicesArea from "@/components/ServiceArea";
+import ServiceArea from "@/components/ServiceArea";
 import SolutionOne from "@/components/template/SolutionOne";
 import TeamAreaFive from "@/components/template/TeamAreaFive";
 import TestimonialSeven from "@/components/template/TestimonialSeven";
@@ -26,8 +26,8 @@ const page = () => {
       {/* Banner Eight */}
       <HeroBanner />
 
-      {/* Service Area Seven */}
-      <ServicesArea />
+      {/* Service Area */}
+      <ServiceArea />
 
       {/* Why Choose */}
       <WhyChoose />

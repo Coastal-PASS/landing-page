@@ -53,7 +53,7 @@ const HeroBanner = () => {
                 >
                   Get In Touch <FaArrowAltCircleRight className="mt-4" />
                 </Link>
-                <div
+                {/* <div
                   className="d-inline-block align-self-center wow animated fadeInLeft mt-4 mt-md-0"
                   data-wow-duration="1.5s"
                   data-wow-delay="0.7s"
@@ -66,7 +66,7 @@ const HeroBanner = () => {
                     <img src="assets/img/video.svg" alt="img" />{" "}
                     <h6 className="d-inline-block text-white">Watch Video</h6>
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

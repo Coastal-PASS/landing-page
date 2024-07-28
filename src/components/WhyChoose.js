@@ -2,7 +2,7 @@ import React from "react";
 
 const WhyChoose = () => {
   return (
-    <div className="why-choose-area pd-bottom-120">
+    <div className="why-choose-area pd-bottom-120 pd-top-120">
       <div className="container">
         <div className="section-title mt-4 mt-lg-0">
           <div className="row">
@@ -24,7 +24,7 @@ const WhyChoose = () => {
         </div>
         <div className="row">
           <div className="col-xl-7 col-lg-6 col-md-8 order-lg-last">
-            <img src="assets/img/home-7/5.png" alt="img" />
+            <img src="assets/img/ct/jake_barn.png" alt="img" />
           </div>
           <div className="col-xl-5 col-lg-6 align-self-center align-self-center">
             <div className="why-choose-us-list mb-3 mt-4 mt-lg-0">
