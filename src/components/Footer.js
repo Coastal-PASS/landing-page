@@ -39,12 +39,12 @@ const Footer = () => {
                     sustainable future in agriculture.
                   </p>
                   <p className="mt-3">
-                    <FaPhoneAlt /> (+888) 123 456 765
+                    <FaPhoneAlt /> 831-612-PASS (7227)
                   </p>
                   <p className="mt-2">
                     <FaEnvelope /> hello@coastalpas.com
                   </p>
-                  <ul className="social-media">
+                  {/* <ul className="social-media">
                     <li>
                       <Link href="#">
                         <FaFacebookF />
@@ -65,7 +65,7 @@ const Footer = () => {
                         <FaYoutube />
                       </Link>
                     </li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>

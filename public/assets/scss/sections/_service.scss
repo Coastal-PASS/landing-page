@@ -221,8 +221,19 @@
   }
 }
 .bg-blue-right {
-  background: rgba(66, 107, 240, 0.1);
+  background: rgba(12, 44, 148, 0.89);
 }
+.service-middle-section-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
 .service-middle-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: auto;
+  padding-bottom: 30px;
 }

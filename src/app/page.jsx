@@ -39,7 +39,7 @@ const page = () => {
       {/* <ContactAreaSix /> */}
 
       {/* TestimonialSeven */}
-      <TestimonialSeven />
+      {/* <TestimonialSeven /> */}
 
       {/* BlogAreaEight */}
       {/* <BlogAreaEight /> */}

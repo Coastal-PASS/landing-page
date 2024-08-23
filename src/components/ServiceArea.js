@@ -76,9 +76,21 @@ const ServiceArea = () => {
               </div>
             </div>
             <div className="col-lg-4 col-md-6 bg-blue-right d-lg-inline-block d-none">
+              <div className="service-thumb service-middle-section-emblem">
+                <img src="assets/img/ct/emblem.png" alt="img" />
+              </div>
               <div className="service-thumb service-middle-section">
-                <img src="assets/img/ct/emblem.png" alt="img" />
-                <img src="assets/img/ct/emblem.png" alt="img" />
+                <img src="assets/img/ct/nh-logo.png" alt="img" />
+              </div>
+              <div className="service-thumb service-middle-section">
+                <img src="assets/img/ct/raven-logo.png" width="70%" alt="img" />
+              </div>
+              <div className="service-thumb service-middle-section">
+                <img
+                  src="assets/img/ct/ptx-trimble-logo.png"
+                  width="60%"
+                  alt="img"
+                />
               </div>
             </div>
             <div className="col-lg-4 col-md-6">
