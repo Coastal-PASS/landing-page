@@ -46,11 +46,11 @@ const AboutAreaOne = () => {
                 <h6 className="sub-title">Lets Talk</h6>
                 <p className="content mb-2 mb-xl-3">
                   At Coastal PASS, we believe good business starts with a
-                  conversation—not just a form. With deep roots in agriculture,
-                  we provide high-tech solutions paired with the personal,
-                  old-fashioned service you deserve. Like the farmers we serve,
-                  we value relationships built on trust and a handshake, whether
-                  it's over the phone or in person.
+                  conversation — not just a form. With deep roots in
+                  agriculture, we provide high-tech solutions paired with the
+                  personal, old-fashioned service you deserve. Like the farmers
+                  we serve, we value relationships built on trust and a
+                  handshake.
                 </p>
                 <div className="row">
                   <p className="content mb-2 mb-xl-3">
@@ -62,7 +62,7 @@ const AboutAreaOne = () => {
                   </p>
                   <div className="col-md-6">
                     <p className="content mb-2 mb-xl-3">
-                      We're more than happy to meet you on your terms—whether
+                      We're more than happy to meet you on your terms — whether
                       it's at the farm, over the phone, or a visit to our
                       office. Just let us know how you would like to connect!
                     </p>
