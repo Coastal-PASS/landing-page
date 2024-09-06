@@ -5,9 +5,10 @@ import Navbar from "@/components/Navbar";
 import AboutAreaOne from "@/components/template/AboutAreaOne";
 
 export const metadata = {
-  title: "Contact || AglieTech - IT Solutions & Technology NEXT JS Template",
+  title:
+    "Contact || Coastal PASS - High Tech Advantage With Old Fasioned Service",
   description:
-    "Agiletech provide you to build the best agency, app, business, digital, it services, it solutions, network solution, startup, technology, technology company, technology service template.",
+    "Discover Coastal PASS, a leader in precision agriculture. We offer advanced equipment from top brands like New Holland, Raven, and PTX Trimble, along with innovative SaaS solutions for streamlined service and support. Enhance your farm's efficiency and sustainability with our cutting-edge technology and expert services.",
 };
 
 const page = () => {
