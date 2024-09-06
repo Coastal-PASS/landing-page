@@ -77,7 +77,7 @@ const ServiceArea = () => {
             </div>
             <div className="col-lg-4 col-md-6 bg-blue-right d-lg-inline-block d-none">
               <div className="service-thumb service-middle-section-emblem">
-                <img src="assets/img/ct/emblem.png" alt="img" />
+                <img src="assets/img/ct/square.png" alt="img" />
               </div>
               <div className="service-thumb service-middle-section">
                 <img src="assets/img/ct/nh-logo.png" alt="img" />
