@@ -50,8 +50,7 @@ const AboutAreaOne = () => {
                   we provide high-tech solutions paired with the personal,
                   old-fashioned service you deserve. Like the farmers we serve,
                   we value relationships built on trust and a handshake, whether
-                  it's over the phone or in person, to help you find the best
-                  solutions for your operation.
+                  it's over the phone or in person.
                 </p>
                 <div className="row">
                   <p className="content mb-2 mb-xl-3">
