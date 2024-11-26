@@ -42,7 +42,7 @@ const Footer = () => {
                     <FaPhoneAlt /> 831-612-PASS (7227)
                   </p>
                   <p className="mt-2">
-                    <FaEnvelope /> hello@coastalpas.com
+                    <FaEnvelope /> hello@coastalpass.services
                   </p>
                   {/* <ul className="social-media">
                     <li>
