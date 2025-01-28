@@ -1,0 +1,20 @@
+{
+  "applinks": {
+      "details": [
+           {
+             "appIDs": [ "6738905447com.coastaltractor.Coastal-PASS" ],
+             "components": [
+               {
+                  "#": "no_universal_links",
+                  "exclude": true,
+                  "comment": "Matches any URL with a fragment that equals no_universal_links and instructs the system not to open it as a universal link."
+               },
+               {
+                  "/": "/auth/*",
+                  "comment": "Matches any URL with a path that starts with /auth/."
+               }
+             ]
+           }
+       ]
+   }
+}
