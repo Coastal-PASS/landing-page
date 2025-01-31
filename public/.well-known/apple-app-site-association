@@ -16,5 +16,8 @@
              ]
            }
        ]
+   },
+   "webcredentials": {
+      "apps": [ "CU96B4VF7B.com.coastaltractor.Coastal-PASS" ]
    }
 }
