@@ -42,7 +42,7 @@ Replatform the marketing pages (`/`, `/contact`, `/privacy`, `/raven-air-blast`,
 
 ### Success Criteria
 
-- [ ] `.nvmrc`, `tsconfig.json`, `next-env.d.ts`, `tailwind.config.ts`, `postcss.config.js`, `components.json`, and `src/styles/tailwind.css` exist and are wired into `src/app/layout.tsx`.
+- [ ] `.nvmrc`, `tsconfig.json`, `next-env.d.ts`, `tailwind.config.ts`, `postcss.config.js`, `components.json`, `vitest.config.ts`, and `src/styles/tailwind.css` exist and are wired into `src/app/layout.tsx`.
 - [ ] `package.json` pins `next@15.1.x`, `react@19.x`, `react-dom@19.x`, adds Tailwind/postcss/autoprefixer, shadcn deps (`class-variance-authority`, `clsx`, `tailwind-merge`, Radix primitives), `@tanstack/react-query`, `@tanstack/react-query-devtools`, `next-themes`, `react-hook-form`, `@hookform/resolvers`, `zod`, `vitest`, `@testing-library/*`, `jsdom`, `prettier`, `@axe-core/cli`, `lighthouse`, and removes Bootstrap/Sass/Animate/Slick/AOS packages unless proven React-19-ready.
 - [ ] `ClientProviders.tsx` + `query-client.ts` replace `BootstrapInit`, wrap children with ThemeProvider, QueryClientProvider (singleton per TanStack guide), ScrollToTop, and React Query Devtools (dev only).
 - [ ] Navbar, HeroBanner (video CTA), ServiceArea, WhyChoose, Footer, and Raven sections are rewritten in TypeScript using Tailwind utilities + shadcn Button/Card/Separator; assets use `next/image` with `priority` where needed.
@@ -209,8 +209,6 @@ $ tree -L 2 -I node_modules
 ├── vitest.config.ts                     # JSDOM env, coverage thresholds ≥80%
 ├── README.md                            # Updated with Tailwind/shadcn stack + QA steps
 ├── src
-│   ├── styles
-│   │   └── tailwind.css                 # `@tailwind base; @tailwind components; @tailwind utilities;` + resets
 │   ├── app
 │   │   ├── layout.tsx                   # Imports `@/styles/tailwind.css`, wraps children in ClientProviders
 │   │   ├── page.tsx                     # Server component composing marketing sections
@@ -237,12 +235,17 @@ $ tree -L 2 -I node_modules
 │   │           └── ContactStrip.tsx
 │   ├── features
 │   │   └── contact
+│   │       ├── components
+│   │       │   └── ContactForm.tsx      # React Hook Form client component
 │   │       ├── schemas/form.ts          # zod schema + branded types for contact form
 │   │       └── __tests__/contact-form.test.tsx
-│   ├── test
-│   │   └── setup.ts                     # Testing Library + jest-dom setup for Vitest
-│   └── components
-│       └── marketing/__tests__          # Vitest suites for Navbar, Hero, ServiceArea, WhyChoose, Footer, Raven sections
+│   ├── lib
+│   │   ├── env.ts                       # Zod env validation per AGENTS.md
+│   │   └── utils.ts                     # shadcn `cn` helper + shared utilities
+│   ├── styles
+│   │   └── tailwind.css                 # `@tailwind base; @tailwind components; @tailwind utilities;` + resets
+│   └── test
+│       └── setup.ts                     # Testing Library + jest-dom setup for Vitest
 └── public
     └── assets                           # Images remain; SCSS directory removed after migration
 ```
@@ -549,6 +552,7 @@ describe("Navbar", () => {
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,md,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,css,md,json}\"",
+    "test:watch": "vitest watch",
     "test:unit": "vitest run",
     "test:coverage": "vitest run --coverage",
     "validate": "npm run lint && npm run type-check && npm run test:coverage && npm run build"
@@ -678,6 +682,7 @@ TESTS:
 ### Level 1: Syntax & Style (Immediate Feedback)
 
 > These scripts are added during TASK-001. Before they exist, run `next lint`, `tsc --noEmit`, and `npx prettier --check "src/**/*.{ts,tsx,js,jsx,css,md,json}"` directly.
+> The `next` binary resolves from `node_modules/.bin`, so `npm run lint` works even if `which next` returns nothing on a clean machine.
 
 ```bash
 npm run lint                    # next lint with --max-warnings=0 configured in package.json
