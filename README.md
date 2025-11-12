@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Coastal PASS Marketing Site
 
-## Getting Started
+Modernized marketing site built with Next.js 15 (App Router), React 19, Tailwind CSS (shadcn/ui), TanStack Query, and Vitest. The goal is to keep the marketing shell aligned with the GNSS dashboard runtime so shared UI and providers remain compatible.
 
-First, run the development server:
+## Requirements
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js >= 18.18.0 (`.nvmrc` provided)
+- Copy `.env.example` to `.env.local` and adjust values as needed
+- npm (uses local cache via `npm_config_cache=./.npm-cache` in CI)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Commands
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the Next.js dev server with Turbopack |
+| `npm run lint` | ESLint with `--max-warnings=0` |
+| `npm run type-check` | Strict `tsc --noEmit` run |
+| `npm run test:coverage` | Vitest + RTL with 80% global thresholds |
+| `npm run build` | Production build for deployment |
+| `npm run validate` | Runs lint, type-check, coverage, and build sequentially |
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Testing
 
-## Learn More
+- Tests live next to components/features inside `__tests__` folders.
+- Vitest is configured with jsdom, shadcn mocks, and coverage reporters (`text`, `json`, `html`).
+- RTL user behavior tests currently cover Navbar interactions, Hero video dialog, Service Area content, Raven hero copy, providers, and the contact form validation.
 
-To learn more about Next.js, take a look at the following resources:
+## Manual QA & Accessibility
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Refer to [`docs/qa/manual-phase1.md`](docs/qa/manual-phase1.md) for the Phase 1 manual QA checklist (routes exercised, expected CTAs, and screenshot guidance).
+- Accessibility spot checks use `@axe-core/cli` and `lighthouse` devDependencies once the app is running (`npm run dev`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Stack Highlights
 
-## Deploy on Vercel
+- **UI**: Tailwind 3.4 with shadcn components (button, card, sheet, dialog, input, etc.)
+- **Providers**: `ClientProviders` wraps `next-themes`, TanStack Query (singleton client), and ScrollToTop + DevTools (dev only)
+- **Forms & Validation**: `react-hook-form` + `zod`, with Zod schemas also powering static Raven brochure data.
+- **Testing**: Vitest + RTL + jest-dom + jsdom environment, coverage thresholds enforced at 80%.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## QA Checklist Summary
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. `npm run lint`
+2. `npm run type-check`
+3. `npm run test:coverage`
+4. `npm run build`
+5. Manual route verification + screenshots per [`docs/qa/manual-phase1.md`](docs/qa/manual-phase1.md)

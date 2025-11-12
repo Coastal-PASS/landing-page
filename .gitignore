@@ -13,6 +13,9 @@
 /.next/
 /out/
 
+# npm cache used for sandbox installs
+/.npm-cache
+
 # production
 /build
 
@@ -33,4 +36,3 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-next-env.d.ts
