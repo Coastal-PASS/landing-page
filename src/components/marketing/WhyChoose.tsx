@@ -61,7 +61,7 @@ export const WhyChoose = (): ReactElement => (
       <div className="relative">
         <div className="hidden lg:block">
           <div
-            className="absolute -top-6 -right-6 h-40 w-40 rounded-full bg-brand-accent/20 blur-3xl"
+            className="absolute -top-6 -right-6 h-40 w-40 rounded-full bg-brand-highlight/30 blur-3xl"
             aria-hidden
           />
         </div>

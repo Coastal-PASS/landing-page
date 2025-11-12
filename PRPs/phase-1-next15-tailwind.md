@@ -171,7 +171,17 @@ module.exports = {
       colors: {
         brand: {
           primary: '#0c2c94',  # var(--main-color)
-          accent: '#ee0020',
+          accent: '#f5c400',   # approved secondary yellow
+          highlight: '#8ea1c6',
+          neutral: '#6c7484',
+          wash: '#dfe7f7',
+          destructive: '#c75c02',
+          heading: '#101a29',
+          body: '#6c7484',
+        },
+        surface: {
+          muted: '#dfe7f7',
+          deep: '#6c7484',
         },
       },
       fontFamily: {

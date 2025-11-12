@@ -20,7 +20,7 @@ export const ContactStrip = ({
   const links = [contact.website, contact.instagram, contact.phone];
 
   return (
-    <div className="bg-gradient-to-r from-brand-heading via-brand-primary to-brand-accent py-6 text-white">
+    <div className="bg-gradient-to-r from-brand-heading via-brand-primary to-brand-wash py-6 text-white">
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-4 px-4 text-sm font-semibold uppercase tracking-wide">
         <span>{contact.text}</span>
         {links.map((link) => (

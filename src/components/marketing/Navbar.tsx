@@ -53,7 +53,7 @@ export const Navbar = (): ReactElement => {
 
   return (
     <header className="sticky inset-x-0 top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-20 w-full max-w-6xl items-center justify-between px-4 lg:h-24">
         <Link
           className="flex items-center gap-3"
           href="/"
@@ -62,8 +62,8 @@ export const Navbar = (): ReactElement => {
           <Image
             src="/assets/img/ct/logo.png"
             alt="Coastal PASS"
-            width={156}
-            height={40}
+            width={230}
+            height={60}
             priority
           />
         </Link>

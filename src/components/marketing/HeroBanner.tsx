@@ -21,7 +21,7 @@ const HERO_VIDEO_ID = "OqdMp-dZnjU";
  * Marketing hero with CTA buttons and an optional embedded video dialog.
  */
 export const HeroBanner = (): ReactElement => (
-  <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-primary via-brand-primary to-brand-violet text-white">
+  <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-primary via-brand-primary/90 to-brand-wash text-white">
     <Image
       src="/assets/img/ct/hero.jpg"
       alt="Coastal PASS team in the field"
@@ -96,6 +96,6 @@ export const HeroBanner = (): ReactElement => (
         </div>
       </div>
     </div>
-    <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-brand-accent via-brand-fuchsia to-brand-violet" />
+    <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-brand-accent via-brand-highlight to-brand-wash" />
   </section>
 );

@@ -24,14 +24,14 @@ const AuthCallbackPage = (): ReactElement => (
         <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <Link
             href="/"
-            className="font-semibold text-brand-primary transition hover:text-brand-accent"
+            className="font-semibold text-brand-primary transition hover:text-brand-highlight"
           >
             Back to Home
           </Link>
           <span className="hidden text-brand-body sm:inline">&bull;</span>
           <Link
             href="/contact"
-            className="font-semibold text-brand-primary transition hover:text-brand-accent"
+            className="font-semibold text-brand-primary transition hover:text-brand-highlight"
           >
             Need help? Contact us
           </Link>

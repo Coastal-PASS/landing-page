@@ -112,7 +112,7 @@ export const ServiceArea = (): ReactElement => (
 const ButtonLink = (): ReactElement => (
   <Link
     href="/contact"
-    className="inline-flex items-center text-sm font-semibold text-brand-primary transition hover:text-brand-accent"
+    className="inline-flex items-center text-sm font-semibold text-brand-primary transition hover:text-brand-highlight"
   >
     Talk with our team
     <span aria-hidden className="ml-1">

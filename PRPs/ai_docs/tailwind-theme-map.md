@@ -7,15 +7,14 @@ Use this cheat sheet while replacing the legacy Bootstrap/SCSS bundle with Tailw
 | Legacy Token / Selector | Hex Value | Tailwind Token to Add (theme.extend.colors) | Usage Notes |
 | --- | --- | --- | --- |
 | `--main-color` | `#0c2c94` | `brand.primary` | Buttons, headings, icon borders, nav links (`.sub-title-nh-blue`, `.single-service-inner-3` borders). |
-| `--main-color2` | `#ee0020` | `brand.accent` | CTA hover + decorative spans. |
-| `--main-color3` | `#ff00ea` | `brand.fuchsia` | Secondary gradients. |
-| `--main-color4` | `#7e22ce` | `brand.purple` | Hero gradients + CTA glows. |
-| `--main-color5` | `#6d18ef` | `brand.violet` | Rare accent backgrounds. |
-| `--main-color6` | `#e94057` | `brand.crimson` | Raven highlight icons. |
+| `--main-color2` | `#f5c400` | `brand.accent` | Secondary CTAs, icon borders, badges. |
+| `--main-color3` (new) | `#8ea1c6` | `brand.highlight` | Metallic glows, link hovers, subtle gradients. |
+| `--main-color4` (warm gray) | `#6c7484` | `brand.neutral` / `brand.body` | Paragraph copy, subtitles, icon captions. |
+| `--main-color5` (wash) | `#dfe7f7` | `brand.wash` / `surface.muted` | Section backgrounds and gradient end stops. |
+| `--main-color6` (alert) | `#c75c02` | `brand.destructive` | Validation errors, destructive buttons. |
 | `--heading-color` | `#101a29` | `brand.heading` | Default `text-brand-heading`. |
-| `--paragraph-color` | `#737588` | `brand.body` | Body copy + icon captions. |
-| `.bg-gray` (`_extra.scss:812`) | `#f3f6fc` | `surface.muted` | Sections with light panels (ServiceArea pill). |
-| `.service-area.single-service-inner-3:hover` background | `#3c547c` | `surface.deep` | Use for hover states to retain dark slate behavior. |
+| `.bg-gray` (`_extra.scss:812`) | `#dfe7f7` | `surface.muted` | Sections with light panels (ServiceArea pill). |
+| `.service-area.single-service-inner-3:hover` background | `#6c7484` | `surface.deep` / `brand.neutral` | Use for hover states to retain dark slate behavior. |
 
 ### Font + Typography
 

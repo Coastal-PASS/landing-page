@@ -58,7 +58,7 @@ const ContactPage = (): ReactElement => (
               </p>
               <Link
                 href={method.href}
-                className="mt-2 block text-lg font-semibold text-brand-heading hover:text-brand-accent"
+                className="mt-2 block text-lg font-semibold text-brand-heading hover:text-brand-highlight"
               >
                 {method.value}
               </Link>

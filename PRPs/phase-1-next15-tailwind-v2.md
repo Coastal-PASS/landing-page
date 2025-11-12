@@ -282,17 +282,17 @@ export default {
       colors: {
         brand: {
           primary: "#0c2c94",
-          accent: "#ee0020",
-          fuchsia: "#ff00ea",
-          purple: "#7e22ce",
-          violet: "#6d18ef",
-          crimson: "#e94057",
+          accent: "#f5c400",
+          highlight: "#8ea1c6",
+          neutral: "#6c7484",
+          wash: "#dfe7f7",
+          destructive: "#c75c02",
           heading: "#101a29",
-          body: "#737588",
+          body: "#6c7484",
         },
         surface: {
-          muted: "#f3f6fc",
-          deep: "#3c547c",
+          muted: "#dfe7f7",
+          deep: "#6c7484",
         },
       },
       spacing: {

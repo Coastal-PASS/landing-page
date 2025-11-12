@@ -88,6 +88,6 @@
   }
 
   a {
-    @apply text-brand-primary underline-offset-4 transition hover:text-brand-accent;
+    @apply text-brand-primary underline-offset-4 transition hover:text-brand-highlight;
   }
 }

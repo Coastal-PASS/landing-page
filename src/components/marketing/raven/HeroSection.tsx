@@ -22,7 +22,7 @@ export const HeroSection = ({
   const safeLogos = logos ?? [];
 
   return (
-    <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-heading via-brand-primary to-brand-violet py-25 text-white">
+    <section className="relative isolate overflow-hidden bg-gradient-to-br from-brand-heading via-brand-primary/90 to-brand-wash py-25 text-white">
       <div
         className="absolute inset-0 bg-[url('/assets/img/ct/hero.jpg')] bg-cover bg-center opacity-10"
         aria-hidden

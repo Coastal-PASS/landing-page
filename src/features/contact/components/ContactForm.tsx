@@ -123,6 +123,6 @@ const Field = ({ label, name, error, children }: FieldProps): ReactElement => (
       {label}
     </Label>
     {children(name)}
-    {error ? <p className="text-sm text-brand-accent">{error}</p> : null}
+    {error ? <p className="text-sm text-brand-destructive">{error}</p> : null}
   </div>
 );
