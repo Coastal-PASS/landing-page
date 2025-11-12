@@ -1,16 +1,18 @@
-import Image from 'next/image';
-import { type ReactElement } from 'react';
+import Image from "next/image";
+import { type ReactElement } from "react";
 
-import type { RavenBrochure } from '@/scripts/ravenBrochure';
+import type { RavenBrochure } from "@/scripts/ravenBrochure";
 
 interface ClosingSectionProps {
-  readonly closing?: RavenBrochure['closingContent'];
+  readonly closing?: RavenBrochure["closingContent"];
 }
 
 /**
  * Closing CTA encouraging customers to contact local reps.
  */
-export const ClosingSection = ({ closing }: ClosingSectionProps): ReactElement | null => {
+export const ClosingSection = ({
+  closing,
+}: ClosingSectionProps): ReactElement | null => {
   if (!closing) {
     return null;
   }

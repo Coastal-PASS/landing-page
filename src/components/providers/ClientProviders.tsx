@@ -1,18 +1,20 @@
-'use client';
+"use client";
 
-import type { ReactElement, ReactNode } from 'react';
-import { ThemeProvider } from 'next-themes';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import ScrollToTop from 'react-scroll-to-top';
+import type { ReactElement, ReactNode } from "react";
+import { ThemeProvider } from "next-themes";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ScrollToTop from "react-scroll-to-top";
 
-import { getQueryClient } from './query-client';
+import { getQueryClient } from "./query-client";
 
 interface ClientProvidersProps {
   readonly children: ReactNode;
 }
 
-export const ClientProviders = ({ children }: ClientProvidersProps): ReactElement => {
+export const ClientProviders = ({
+  children,
+}: ClientProvidersProps): ReactElement => {
   const queryClient = getQueryClient();
 
   return (
@@ -20,7 +22,7 @@ export const ClientProviders = ({ children }: ClientProvidersProps): ReactElemen
       <QueryClientProvider client={queryClient}>
         {children}
         <ScrollToTop smooth color="#0c2c94" />
-        {process.env.NODE_ENV !== 'production' ? (
+        {process.env.NODE_ENV !== "production" ? (
           <ReactQueryDevtools initialIsOpen={false} position="bottom" />
         ) : null}
       </QueryClientProvider>

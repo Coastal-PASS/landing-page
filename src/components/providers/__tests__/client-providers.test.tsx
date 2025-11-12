@@ -1,27 +1,31 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { render, screen } from "@testing-library/react";
+import type { ReactElement } from "react";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
-import { ClientProviders } from '../ClientProviders';
+import { ClientProviders } from "../ClientProviders";
 
-vi.mock('@tanstack/react-query-devtools', () => ({
-  ReactQueryDevtools: () => <div data-testid="devtools" />,
+vi.mock("@tanstack/react-query-devtools", () => ({
+  ReactQueryDevtools: (): ReactElement => <div data-testid="devtools" />,
 }));
 
-describe('ClientProviders', () => {
-  it('renders children within providers', () => {
+afterEach(() => {
+  vi.unstubAllEnvs();
+});
+
+describe("ClientProviders", () => {
+  it("renders children within providers", () => {
     render(
       <ClientProviders>
         <p>provider child</p>
       </ClientProviders>,
     );
 
-    expect(screen.getByText('provider child')).toBeInTheDocument();
-    expect(screen.getByTestId('devtools')).toBeInTheDocument();
+    expect(screen.getByText("provider child")).toBeInTheDocument();
+    expect(screen.getByTestId("devtools")).toBeInTheDocument();
   });
 
-  it('omits devtools in production', () => {
-    const originalEnv = process.env.NODE_ENV;
-    process.env.NODE_ENV = 'production';
+  it("omits devtools in production", () => {
+    vi.stubEnv("NODE_ENV", "production");
 
     render(
       <ClientProviders>
@@ -29,7 +33,6 @@ describe('ClientProviders', () => {
       </ClientProviders>,
     );
 
-    expect(screen.queryByTestId('devtools')).toBeNull();
-    process.env.NODE_ENV = originalEnv;
+    expect(screen.queryByTestId("devtools")).toBeNull();
   });
 });

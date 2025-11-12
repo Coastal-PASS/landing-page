@@ -1,16 +1,18 @@
-import Image from 'next/image';
-import { type ReactElement } from 'react';
+import Image from "next/image";
+import { type ReactElement } from "react";
 
-import type { RavenBrochure } from '@/scripts/ravenBrochure';
+import type { RavenBrochure } from "@/scripts/ravenBrochure";
 
 interface AgSyncSectionProps {
-  readonly content?: RavenBrochure['agsyncContent'];
+  readonly content?: RavenBrochure["agsyncContent"];
 }
 
 /**
  * Highlights the AgSync Dispatch Pro platform and its advantages.
  */
-export const AgSyncSection = ({ content }: AgSyncSectionProps): ReactElement | null => {
+export const AgSyncSection = ({
+  content,
+}: AgSyncSectionProps): ReactElement | null => {
   if (!content) {
     return null;
   }
@@ -38,7 +40,10 @@ export const AgSyncSection = ({ content }: AgSyncSectionProps): ReactElement | n
               <ul className="mt-3 space-y-2 text-sm text-brand-heading">
                 {content.advantageBullets.map((bullet) => (
                   <li key={bullet} className="flex items-start gap-2">
-                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-primary" aria-hidden />
+                    <span
+                      className="mt-1 h-2 w-2 rounded-full bg-brand-primary"
+                      aria-hidden
+                    />
                     <span>{bullet}</span>
                   </li>
                 ))}

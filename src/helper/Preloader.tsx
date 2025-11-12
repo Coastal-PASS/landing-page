@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import type { ReactElement } from 'react';
+import type { ReactElement } from "react";
 
 const Preloader = (): ReactElement => (
   <div className="preloader">

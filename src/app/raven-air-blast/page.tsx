@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
-import { type ReactElement } from 'react';
+import type { Metadata } from "next";
+import { type ReactElement } from "react";
 
 import {
   Footer,
@@ -9,7 +9,7 @@ import {
   RavenContactStrip,
   RavenHeroSection,
   RavenSystemsSection,
-} from '@/components/marketing';
+} from "@/components/marketing";
 import {
   agsyncContent,
   closingContent,
@@ -18,11 +18,12 @@ import {
   heroContent,
   brochureLogos,
   tractorOptions,
-} from '@/scripts/ravenBrochure';
+} from "@/scripts/ravenBrochure";
 
 export const metadata: Metadata = {
-  title: 'Raven Air Blast Sprayer Application Kit',
-  description: 'Discover how Raven technology boosts coverage and saves inputs for specialty crop sprayers.',
+  title: "Raven Air Blast Sprayer Application Kit",
+  description:
+    "Discover how Raven technology boosts coverage and saves inputs for specialty crop sprayers.",
 };
 
 const RavenAirBlastPage = (): ReactElement => (

@@ -1,12 +1,19 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, type ReactElement } from 'react';
+import Image from "next/image";
+import Link from "next/link";
+import { useState, type ReactElement } from "react";
 
-import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger, SheetDescription } from '@/components/ui/sheet';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetDescription,
+} from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
 
 interface NavLink {
   readonly href: string;
@@ -14,10 +21,10 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: '/', label: 'Home' },
-  { href: '/contact', label: 'Contact' },
-  { href: '/privacy', label: 'Privacy' },
-  { href: '/raven-air-blast', label: 'Raven' },
+  { href: "/", label: "Home" },
+  { href: "/contact", label: "Contact" },
+  { href: "/privacy", label: "Privacy" },
+  { href: "/raven-air-blast", label: "Raven" },
 ];
 
 const renderLinks = (onNavigate?: () => void): ReactElement => (
@@ -27,7 +34,7 @@ const renderLinks = (onNavigate?: () => void): ReactElement => (
         <Link
           className="transition hover:text-brand-primary"
           href={href}
-          onClick={(_event): void => {
+          onClick={(): void => {
             onNavigate?.();
           }}
         >
@@ -47,7 +54,11 @@ export const Navbar = (): ReactElement => {
   return (
     <header className="sticky inset-x-0 top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4">
-        <Link className="flex items-center gap-3" href="/" aria-label="Coastal PASS home">
+        <Link
+          className="flex items-center gap-3"
+          href="/"
+          aria-label="Coastal PASS home"
+        >
           <Image
             src="/assets/img/ct/logo.png"
             alt="Coastal PASS"
@@ -70,7 +81,7 @@ export const Navbar = (): ReactElement => {
               aria-label="Open navigation menu"
               aria-expanded={mobileOpen}
               className={cn(
-                'inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 lg:hidden',
+                "inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 lg:hidden",
               )}
             >
               <span className="sr-only">Open navigation</span>
@@ -83,7 +94,9 @@ export const Navbar = (): ReactElement => {
             <SheetContent side="right" className="w-[320px]">
               <SheetHeader>
                 <SheetTitle>Menu</SheetTitle>
-                <SheetDescription className="sr-only">Primary navigation links</SheetDescription>
+                <SheetDescription className="sr-only">
+                  Primary navigation links
+                </SheetDescription>
               </SheetHeader>
               <nav aria-label="Mobile navigation" className="mt-6">
                 {renderLinks(() => setMobileOpen(false))}

@@ -1,16 +1,18 @@
-import Link from 'next/link';
-import { type ReactElement } from 'react';
+import Link from "next/link";
+import { type ReactElement } from "react";
 
-import type { RavenBrochure } from '@/scripts/ravenBrochure';
+import type { RavenBrochure } from "@/scripts/ravenBrochure";
 
 interface ContactStripProps {
-  readonly contact?: RavenBrochure['contactStrip'];
+  readonly contact?: RavenBrochure["contactStrip"];
 }
 
 /**
  * Gradient contact strip for the Raven brochure page.
  */
-export const ContactStrip = ({ contact }: ContactStripProps): ReactElement | null => {
+export const ContactStrip = ({
+  contact,
+}: ContactStripProps): ReactElement | null => {
   if (!contact) {
     return null;
   }
@@ -22,7 +24,11 @@ export const ContactStrip = ({ contact }: ContactStripProps): ReactElement | nul
       <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-4 px-4 text-sm font-semibold uppercase tracking-wide">
         <span>{contact.text}</span>
         {links.map((link) => (
-          <Link key={link.href} href={link.href} className="text-white transition hover:text-surface-muted">
+          <Link
+            key={link.href}
+            href={link.href}
+            className="text-white transition hover:text-surface-muted"
+          >
             {link.label}
           </Link>
         ))}

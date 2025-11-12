@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, type ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState, type ReactElement } from "react";
+import { useForm } from "react-hook-form";
 
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 
-import { contactFormSchema, type ContactFormData } from '../schemas/form';
+import { contactFormSchema, type ContactFormData } from "../schemas/form";
 
 /**
  * Validated contact form used on the marketing site.
  */
 export const ContactForm = (): ReactElement => {
-  const [status, setStatus] = useState<'idle' | 'success'>('idle');
+  const [status, setStatus] = useState<"idle" | "success">("idle");
   const {
     register,
     handleSubmit,
@@ -24,28 +24,35 @@ export const ContactForm = (): ReactElement => {
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
     },
-    mode: 'onBlur',
+    mode: "onBlur",
   });
 
   const onSubmit = async (data: ContactFormData): Promise<void> => {
-    setStatus('idle');
+    setStatus("idle");
     void data;
     await new Promise((resolve) => setTimeout(resolve, 700));
     // TODO: Wire WorkOS/Supabase action once backend is ready.
     reset();
-    setStatus('success');
+    setStatus("success");
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
       <div className="grid gap-4 md:grid-cols-2">
         <Field label="Name" name="contact-name" error={errors.name?.message}>
-          {(fieldId) => <Input id={fieldId} placeholder="Jane Grower" {...register('name')} disabled={isSubmitting} />}
+          {(fieldId) => (
+            <Input
+              id={fieldId}
+              placeholder="Jane Grower"
+              {...register("name")}
+              disabled={isSubmitting}
+            />
+          )}
         </Field>
         <Field label="Email" name="contact-email" error={errors.email?.message}>
           {(fieldId) => (
@@ -53,32 +60,50 @@ export const ContactForm = (): ReactElement => {
               id={fieldId}
               type="email"
               placeholder="hello@coastalpass.services"
-              {...register('email')}
+              {...register("email")}
               disabled={isSubmitting}
             />
           )}
         </Field>
       </div>
       <Field label="Phone" name="contact-phone" error={errors.phone?.message}>
-        {(fieldId) => <Input id={fieldId} placeholder="831-555-0000" {...register('phone')} disabled={isSubmitting} />}
+        {(fieldId) => (
+          <Input
+            id={fieldId}
+            placeholder="831-555-0000"
+            {...register("phone")}
+            disabled={isSubmitting}
+          />
+        )}
       </Field>
-      <Field label="Message" name="contact-message" error={errors.message?.message}>
+      <Field
+        label="Message"
+        name="contact-message"
+        error={errors.message?.message}
+      >
         {(fieldId) => (
           <Textarea
             id={fieldId}
             rows={5}
             placeholder="Tell us about your fleet..."
-            {...register('message')}
+            {...register("message")}
             disabled={isSubmitting}
           />
         )}
       </Field>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <Button type="submit" size="lg" disabled={isSubmitting} className="w-full sm:w-auto">
-          {isSubmitting ? 'Sending...' : 'Send Message'}
+        <Button
+          type="submit"
+          size="lg"
+          disabled={isSubmitting}
+          className="w-full sm:w-auto"
+        >
+          {isSubmitting ? "Sending..." : "Send Message"}
         </Button>
-        {status === 'success' ? (
-          <p className="text-sm font-semibold text-brand-primary">Thanks! We will be in touch within one business day.</p>
+        {status === "success" ? (
+          <p className="text-sm font-semibold text-brand-primary">
+            Thanks! We will be in touch within one business day.
+          </p>
         ) : null}
       </div>
     </form>

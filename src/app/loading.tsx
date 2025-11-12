@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
+import type { ReactElement } from "react";
 
-import Preloader from '@/helper/Preloader';
+import Preloader from "@/helper/Preloader";
 
 const Loading = (): ReactElement => <Preloader />;
 
