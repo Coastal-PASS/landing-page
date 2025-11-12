@@ -81,10 +81,12 @@ h6 {
 
 p {
   color: var(--paragraph-color);
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+  overflow-wrap: break-word;
+  word-break: normal;
   margin-bottom: 10px;
 }
 

@@ -66,7 +66,7 @@ const NavbarThree = () => {
       ></div>
       {/* ==================== Navbar Two Start ====================*/}
       <nav className="navbar navbar-area navbar-area_3 navbar-area-2 navbar-expand-lg bg-white">
-        <div className="container nav-container custom-container">
+        <div className="container nav-container">
           <div className="responsive-mobile-menu">
             <button
               onClick={menuActive}

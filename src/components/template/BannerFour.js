@@ -7,7 +7,7 @@ const BannerFour = () => {
     <>
       {/* ================== BannerFour Start ==================*/}
       <div className="banner-area banner-area_4 bg-relative banner-area-3">
-        <div className="container custom-container">
+        <div className="container">
           <div className="bg-gray">
             <img
               className="img-right"

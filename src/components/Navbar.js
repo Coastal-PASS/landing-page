@@ -51,7 +51,7 @@ const Navbar = () => {
     <>
       {/* navbar start */}
       <nav className="navbar navbar-area navbar-area_7 navbar-area-2 navbar-area-7 navbar-expand-lg bg-white">
-        <div className="container nav-container custom-container">
+        <div className="container nav-container">
           <div className="responsive-mobile-menu">
             <button
               onClick={menuActive}

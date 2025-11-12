@@ -128,7 +128,7 @@ const NavbarFive = () => {
             </div>
             {/* navbar start */}
             <nav className="navbar navbar-area navbar-area_5 navbar-area-2 navbar-expand-lg bg-white">
-              <div className="container nav-container custom-container ps-lg-0">
+              <div className="container nav-container ps-lg-0">
                 <div className="responsive-mobile-menu">
                   <button
                     onClick={menuActive}
