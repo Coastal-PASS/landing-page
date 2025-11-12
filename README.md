@@ -7,6 +7,7 @@ Modernized marketing site built with Next.js 15 (App Router), React 19, Tailwind
 - Node.js >= 18.18.0 (`.nvmrc` provided)
 - Copy `.env.example` to `.env.local` and adjust values as needed
 - npm (uses local cache via `npm_config_cache=./.npm-cache` in CI)
+- When deploying on Netlify, `NEXT_PUBLIC_APP_URL` and `NEXTAUTH_URL` automatically fall back to `DEPLOY_PRIME_URL` → `DEPLOY_URL` → `URL`, so you normally do not need to set them manually per deploy preview
 
 ## Key Commands
 

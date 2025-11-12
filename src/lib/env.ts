@@ -8,12 +8,26 @@ const envSchema = z.object({
   NEXTAUTH_URL: z.string().url(),
 });
 
+const resolveNetlifyUrl = (): string | undefined =>
+  process.env.DEPLOY_PRIME_URL ??
+  process.env.DEPLOY_URL ??
+  process.env.URL;
+
+const fallbackAppUrl =
+  process.env.NEXT_PUBLIC_APP_URL ??
+  resolveNetlifyUrl() ??
+  "http://localhost:3000";
+
+const fallbackNextAuthUrl =
+  process.env.NEXTAUTH_URL ??
+  fallbackAppUrl;
+
 export const env = envSchema.parse({
   NODE_ENV: process.env.NODE_ENV,
-  NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+  NEXT_PUBLIC_APP_URL: fallbackAppUrl,
   DATABASE_URL: process.env.DATABASE_URL,
   NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-  NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+  NEXTAUTH_URL: fallbackNextAuthUrl,
 });
 
 export type Env = z.infer<typeof envSchema>;
