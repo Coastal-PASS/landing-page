@@ -16,7 +16,12 @@
     "test:watch": "vitest watch",
     "test:unit": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "validate": "npm run lint && npm run type-check && npm run test:coverage && npm run build"
+    "validate": "npm run lint && npm run type-check && npm run test:coverage && npm run build",
+    "go:fmt": "cd backend/gnss && gofmt ./...",
+    "go:lint": "cd backend/gnss && golangci-lint run ./...",
+    "go:test": "cd backend/gnss && go test ./... -race",
+    "go:run": "cd backend/gnss && go run ./cmd/server --config config.local.yaml",
+    "go:migrate": "cd backend/gnss && go run ./cmd/migrate --config config.local.yaml"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

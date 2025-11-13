@@ -15,6 +15,10 @@ describe("Navbar", () => {
       "href",
       "/",
     );
+    expect(scoped.getByRole("link", { name: /gnss planning/i })).toHaveAttribute(
+      "href",
+      "/gnss",
+    );
     expect(scoped.getByRole("link", { name: /raven/i })).toHaveAttribute(
       "href",
       "/raven-air-blast",
@@ -30,8 +34,9 @@ describe("Navbar", () => {
     expect(
       screen.getByRole("navigation", { name: /mobile navigation/i }),
     ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /contact us/i })).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /contact us/i })[0],
+      screen.getByRole("link", { name: /workos sign in/i }),
     ).toBeInTheDocument();
   });
 });

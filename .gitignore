@@ -30,6 +30,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+backend/gnss/config.local.yaml
 
 # vercel
 .vercel

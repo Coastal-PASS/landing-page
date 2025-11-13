@@ -1,0 +1,2 @@
+GET http://localhost:8080/api/v1/gnss/visibility?lat=36.7&lon=-121.4
+x-api-key: demo

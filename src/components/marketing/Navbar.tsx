@@ -22,6 +22,7 @@ interface NavLink {
 
 const navLinks: NavLink[] = [
   { href: "/", label: "Home" },
+  { href: "/gnss", label: "GNSS Planning" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy" },
   { href: "/raven-air-blast", label: "Raven" },
@@ -76,6 +77,14 @@ export const Navbar = (): ReactElement => {
           <Button asChild size="sm" className="hidden sm:inline-flex">
             <Link href="/contact">Contact Us</Link>
           </Button>
+          <Button
+            asChild
+            size="sm"
+            variant="outline"
+            className="hidden lg:inline-flex"
+          >
+            <Link href="/workos/sign-in">WorkOS Sign In</Link>
+          </Button>
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger
               aria-label="Open navigation menu"
@@ -101,11 +110,18 @@ export const Navbar = (): ReactElement => {
               <nav aria-label="Mobile navigation" className="mt-6">
                 {renderLinks(() => setMobileOpen(false))}
               </nav>
-              <Button asChild className="mt-8 w-full">
-                <Link href="/contact" onClick={() => setMobileOpen(false)}>
-                  Contact Us
-                </Link>
-              </Button>
+              <div className="mt-8 space-y-3">
+                <Button asChild className="w-full">
+                  <Link href="/contact" onClick={() => setMobileOpen(false)}>
+                    Contact Us
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" className="w-full">
+                  <Link href="/workos/sign-in" onClick={() => setMobileOpen(false)}>
+                    WorkOS Sign In
+                  </Link>
+                </Button>
+              </div>
             </SheetContent>
           </Sheet>
         </div>

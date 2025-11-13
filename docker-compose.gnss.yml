@@ -1,0 +1,46 @@
+version: "3.9"
+
+services:
+  timescale:
+    image: timescale/timescaledb-postgis:2.14.0-pg16
+    container_name: gnss-timescale
+    ports:
+      - "54322:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - timescale-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.4
+    container_name: gnss-redis
+    ports:
+      - "6379:6379"
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/gnss/Dockerfile
+    container_name: gnss-api
+    depends_on:
+      - timescale
+      - redis
+    environment:
+      SUPABASE_DB_DIRECT_URL: postgres://postgres:postgres@timescale:5432/postgres
+      REDIS_URL: redis://redis:6379/0
+      WORKOS_API_KEY: ${WORKOS_API_KEY:-sk_test}
+      WORKOS_CLIENT_ID: ${WORKOS_CLIENT_ID:-client_test}
+      GNSS_API_KEY_PUBLIC: ${GNSS_API_KEY_PUBLIC:-demo}
+      SPACE_TRACK_USER: ${SPACE_TRACK_USER:-}
+      SPACE_TRACK_PASS: ${SPACE_TRACK_PASS:-}
+      N2YO_API_KEY: ${N2YO_API_KEY:-}
+      SENDGRID_API_KEY: ${SENDGRID_API_KEY:-}
+      SENDGRID_FROM_ADDRESS: ${SENDGRID_FROM_ADDRESS:-gnss@example.com}
+    ports:
+      - "8080:8080"
+    command: ["/srv/server"]
+
+volumes:
+  timescale-data:

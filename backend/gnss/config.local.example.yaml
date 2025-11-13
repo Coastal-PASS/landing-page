@@ -1,0 +1,58 @@
+env: development
+server:
+  port: 8080
+  metrics_port: 9100
+  base_url: http://localhost:8080
+  shutdown_grace_period: 20s
+supabase:
+  pooled_dsn: ${SUPABASE_DB_URL}
+  direct_dsn: postgres://postgres:postgres@localhost:54322/postgres
+  max_connections: 15
+  app_name: gnss-service
+redis:
+  url: redis://localhost:6379/0
+workos:
+  api_key: ${WORKOS_API_KEY}
+  client_id: ${WORKOS_CLIENT_ID}
+  jwks_url: https://api.workos.com/sso/jwks
+  required_permissions:
+    - gnss:read
+    - gnss:write
+  admin_roles:
+    - gnss-admin
+api_keys:
+  anonymous_public: demo
+providers:
+  space_track:
+    username: ${SPACE_TRACK_USER}
+    password: ${SPACE_TRACK_PASS}
+    base_url: https://www.space-track.org
+  celestrak:
+    base_url: https://celestrak.org/NORAD/elements
+  n2yo:
+    api_key: ${N2YO_API_KEY}
+    base_url: https://api.n2yo.com/rest/v1/satellite
+  tec:
+    base_url: https://services.swpc.noaa.gov
+    refresh_cadence: 15m
+    username: ${NASA_CDDIS_USER}
+    password: ${NASA_CDDIS_PASS}
+observability:
+  sentry_dsn: ""
+  prometheus_namespace: gnss
+scheduler:
+  enabled: true
+  poll_interval: 1m
+  refresh_tle_interval: 30m
+  refresh_tec_interval: 15m
+  evaluate_alerts_interval: 5m
+  provider_health_interval: 5m
+email:
+  sendgrid_api_key: ${SENDGRID_API_KEY}
+  from_address: gnss@coastalpass.test
+rate_limit:
+  anonymous_per_minute: 60
+  authenticated_per_minute: 300
+  window_seconds: 60
+notifications:
+  email: true

@@ -1,0 +1,225 @@
+openapi: 3.1.0
+info:
+  title: CoastalPASS GNSS API
+  version: "1.0.0"
+  description: >
+    GNSS planning endpoints served by the Go backend. All responses use the
+    envelope documented in `pkg/types`.
+servers:
+  - url: https://api.coastalpass.com
+paths:
+  /api/v1/gnss/health:
+    get:
+      summary: Service health
+      tags: [System]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+  /api/v1/gnss/visibility:
+    get:
+      summary: Satellite visibility windows
+      tags: [Telemetry]
+      parameters:
+        - in: query
+          name: lat
+          schema: { type: number }
+          required: true
+        - in: query
+          name: lon
+          schema: { type: number }
+          required: true
+        - in: query
+          name: elevation_m
+          schema: { type: number, default: 0 }
+      responses:
+        "200":
+          description: Satellite passes
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SatelliteVisibilityResponse"
+  /api/v1/gnss/tec:
+    get:
+      summary: TEC heatmap
+      tags: [Telemetry]
+      responses:
+        "200":
+          description: TEC grid
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TecHeatmapResponse"
+  /api/v1/gnss/dop:
+    get:
+      summary: DOP metrics
+      tags: [Telemetry]
+      responses:
+        "200":
+          description: Positioning DOP stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DopResponse"
+  /api/v1/gnss/locations:
+    get:
+      summary: Saved locations
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Saved locations list
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/SavedLocation"
+    post:
+      summary: Create saved location
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LocationInput"
+      responses:
+        "201":
+          description: Created
+  /api/v1/gnss/alerts:
+    get:
+      summary: Alert rules
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Rules
+    post:
+      summary: Create alert rule
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlertInput"
+      responses:
+        "201":
+          description: Created
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        providers:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProviderHealth"
+    ProviderHealth:
+      type: object
+      properties:
+        provider: { type: string }
+        status: { type: string }
+        last_success: { type: string, format: date-time }
+        last_error: { type: string }
+    SatelliteVisibilityResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            location:
+              $ref: "#/components/schemas/Coordinate"
+            passes:
+              type: array
+              items:
+                $ref: "#/components/schemas/SatellitePass"
+    TecHeatmapResponse:
+      type: object
+      properties:
+        data:
+          type: object
+          properties:
+            cells:
+              type: array
+              items:
+                $ref: "#/components/schemas/TecCell"
+            sampled_at:
+              type: string
+              format: date-time
+    DopResponse:
+      type: object
+      properties:
+        data:
+          $ref: "#/components/schemas/DOP"
+    DOP:
+      type: object
+      properties:
+        location:
+          $ref: "#/components/schemas/Coordinate"
+        pdop: { type: number }
+        hdop: { type: number }
+        vdop: { type: number }
+        satellite_count: { type: integer }
+    Coordinate:
+      type: object
+      properties:
+        latitude: { type: number }
+        longitude: { type: number }
+        elevation_m: { type: number }
+    SatellitePass:
+      type: object
+      properties:
+        satellite_name: { type: string }
+        norad_id: { type: integer }
+        start: { type: string, format: date-time }
+        end: { type: string, format: date-time }
+        max_elevation: { type: number }
+        aos_azimuth: { type: number }
+        los_azimuth: { type: number }
+    TecCell:
+      type: object
+      properties:
+        latitude: { type: number }
+        longitude: { type: number }
+        value: { type: number }
+    SavedLocation:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        name: { type: string }
+        org_id: { type: string }
+        coordinate:
+          $ref: "#/components/schemas/Coordinate"
+    LocationInput:
+      type: object
+      required: [name, latitude, longitude]
+      properties:
+        name: { type: string }
+        latitude: { type: number }
+        longitude: { type: number }
+        elevation_m: { type: number }
+    AlertInput:
+      type: object
+      required: [name, rule_type, threshold_value, schedule_cron]
+      properties:
+        name: { type: string }
+        rule_type: { type: string, enum: [PDOP_THRESHOLD, TEC_SPIKE] }
+        threshold_value: { type: number }
+        schedule_cron: { type: string }
+        notification_channel: { type: string }

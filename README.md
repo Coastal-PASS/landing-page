@@ -45,3 +45,30 @@ Modernized marketing site built with Next.js 15 (App Router), React 19, Tailwind
 3. `npm run test:coverage`
 4. `npm run build`
 5. Manual route verification + screenshots per [`docs/qa/manual-phase1.md`](docs/qa/manual-phase1.md)
+
+## GNSS Go Backend (Phase 2)
+
+The Phase 2 PRP adds a Go 1.24 GNSS backend under `backend/gnss`. Copy the committed template when running locally:
+
+```bash
+cp backend/gnss/config.local.example.yaml backend/gnss/config.local.yaml
+```
+
+Fill in Supabase, Redis, WorkOS, Space-Track/N2YO, and SendGrid credentials or export the env vars defined in `.env.example`. Install the required CLIs (`golangci-lint`, `vegeta`, `gosec`, `wos`) before running the validation loop.
+
+| Command | Description |
+| --- | --- |
+| `npm run go:fmt` | gofmt all backend packages |
+| `npm run go:lint` | `golangci-lint run ./...` inside `backend/gnss` |
+| `npm run go:test` | `go test ./... -race` inside `backend/gnss` |
+| `npm run go:run` | Starts the Gin API using `config.local.yaml` |
+| `npm run go:migrate` | Applies Timescale migrations via `cmd/migrate` |
+
+Run `docker compose -f docker-compose.gnss.yml up --build` to launch Supabase Postgres + Redis for integration tests, then hit:
+
+```bash
+curl -f http://localhost:8080/api/v1/gnss/health
+curl -H "x-api-key: $GNSS_API_KEY_PUBLIC" "http://localhost:8080/api/v1/gnss/visibility?lat=36.7&lon=-121.4"
+```
+
+See `backend/gnss/README.md` and `PRPs/phase-2-gnss-backend.md` for the full validation ladder (lint → tests → docker → vegeta).

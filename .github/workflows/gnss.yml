@@ -1,0 +1,28 @@
+name: GNSS Backend
+
+on:
+  push:
+    paths:
+      - "backend/gnss/**"
+      - "docker-compose.gnss.yml"
+  pull_request:
+    paths:
+      - "backend/gnss/**"
+      - "docker-compose.gnss.yml"
+
+jobs:
+  go:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+      - name: Go fmt check
+        run: |
+          cd backend/gnss
+          diff -u <(printf "") <(gofmt -l .)
+      - name: Go tests
+        run: |
+          cd backend/gnss
+          go test ./... -race
