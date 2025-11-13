@@ -57,31 +57,62 @@ Deliverable: Marketing site running on Next 15/React 19 with Tailwind/shadcn, 
 
 ---
 
-## Phase 2 – Backend Port to Supabase + WorkOS
+## Phase 2 – Build CoastalPASS GNSS Go Backend (Supabase + WorkOS)
 
-**Objective:** Rehost the Go GNSS service with WorkOS-based auth and Supabase Postgres while preserving provider logic.
+**Objective:** Stand up a brand-new Go backend _inside this repo_ (for example `backend/gnss`) that mirrors the behavior of `../AgCore/backend/internal/gnss/**` without altering that codebase. This service must own WorkOS authentication, Supabase-hosted Timescale data, provider orchestration, and every GNSS Planning endpoint the marketing site depends on.
+
+### Findings from AgCore’s GNSS stack (porting checklist)
+
+- `internal/gnss/gnss_manager.go` wires config, pooled DB access, provider manager, batch scheduler, calculation engines (SGP4, DOP, TEC), recommendation engine, and route registration. Our new manager needs the same lifecycle so HTTP handlers can rely on initialized engines and schedulers.
+- `internal/gnss/api/gnss_service.go` exposes recommendations, batch jobs, regional coverage, satellite visibility/positions/predictions, DOP/TEC analyses, provider/system health, agricultural intelligence routes, and admin triggers while layering cache, rate limiting, validation, logging, and metrics middleware. These routes and behaviors define our parity contract.
+- `internal/gnss/providers/*.go` implement Space-Track, CelesTrak, N2YO, NASA CDDIS, and NOAA SWPC clients plus Redis-backed rate limiting, circuit breakers, and health checks with per-data-type failover chains.
+- `internal/gnss/calculations/*.go` house the SGP4 propagator, the matrix-math-backed DOP calculator, and the TEC analyzer/interpolator. Each engine caches results, reads historical samples, and surfaces shared request/response structs that the frontend already consumes.
+- `internal/gnss/processors/*.go` schedule batch ingestion (TLE/TEC refresh), manage retries/failure recovery, and expose manual trigger hooks used by `/gnss/admin/**` endpoints.
+- `internal/gnss/database/timescaledb.go` abstracts Timescale hypertable creation, retention policies, and pooled query helpers. We must replicate this against Supabase connection strings.
+- `internal/services/gnss/gnss_service.go` integrates the GNSS router into Gin with `middleware.APIKeyOrSessionMiddleware`, showing how API-key vs. session access is enforced. The new service should import similar middleware patterns but live alongside the marketing project.
+
+These findings describe the functionality our new backend must reproduce.
 
 ### Key Tasks
 
-1. **Supabase Schema & Access Layer**
-   - Export Timescale schema definitions from `../AgCore/backend/internal/gnss/database/timescaledb.go` and recreate them via Supabase migrations (`supabase/migrations/*.sql`).
-   - Modify `TimescaleDBManager` (same path) to connect using Supabase connection strings; confirm hypertable features are enabled.
-   - Ensure ingestion processors (`internal/gnss/processors/tle_processor.go`, `tec_processor.go`) write to Supabase tables via pooled connections.
+1. **Module Scaffolding**
+   - Create `backend/gnss` (Go 1.23+) with `cmd/server`, `internal/{config,gnss,services}` and `pkg/{gnss,math,types}` so ported packages land cleanly.
+   - Initialize a dedicated `go.mod` (e.g., `module github.com/coastalpass/landing/backend/gnss`) and add dependencies for Gin, pgx, go-redis, WorkOS, SendGrid, and any math helpers used by the calculators.
+   - Reimplement `GNSSManager` to mirror AgCore’s startup/shutdown order while reading config from this repo’s `.env` + Supabase secrets.
 
-2. **WorkOS Auth Integration**
-   - Introduce middleware in `internal/services/gnss/gnss_service.go` (or `internal/gnss/api/middleware.go`) that validates WorkOS tokens/JWKS and injects user/org context.
-   - Keep read-only endpoints (`/api/v1/gnss/satellites/positions`, `/api/v1/gnss/tec`, `/api/v1/gnss/dop`) accessible with an app-level API key + rate limiting to support anonymous browsing.
+2. **Supabase Timescale Persistence**
+   - Translate the schema/managers in `../AgCore/backend/internal/gnss/database/timescaledb.go` into SQL migrations stored under `backend/gnss/migrations` (TLE snapshots, TEC grids, coverage caches, scheduler metadata).
+   - Build a new `TimescaleDBManager` that connects through Supabase, enables hypertables/retention policies, and exposes helper methods for processors/calculations.
+   - Provide CLI tooling (`cmd/migrate`) so developers and CI can apply migrations against Supabase.
 
-3. **Saved Data & Alerts**
-   - Define Supabase tables: `users`, `saved_locations`, `alert_rules`, `alert_events`.
-   - Add REST handlers (`gnss_service.go`) for CRUD on saved locations/alerts, gated by WorkOS session.
-   - Extend `processors/batch_scheduler.go` to evaluate alert rules and enqueue notifications (email/SMS) via a future notification service.
+3. **Provider + Calculation Layers**
+   - Port the provider manager, rate limiter, circuit breaker, and health checker so Space-Track, CelesTrak, N2YO, NASA CDDIS, and NOAA SWPC integrations keep the exact failover order and throttling behavior.
+   - Recreate the SGP4 engine, DOP calculator, and TEC analyzer packages so request/response contracts (`DOPCalculationRequest`, `TECInterpolationRequest`, `GNSSRecommendationResponse`, etc.) stay identical for the frontend.
+   - Externalize provider credentials (Space-Track OAuth, N2YO API key, NASA credentials) via Supabase secrets or WorkOS vaults.
 
-4. **Infrastructure & Deployment**
-   - Containerize the Go service with Supabase credentials injected via environment variables.
-   - Add CI jobs to run `go test ./...` and `golangci-lint` before deploying to staging/production.
+4. **HTTP/API Surface + Middleware**
+   - Implement `GNSSService` under `backend/gnss/internal/gnss/api` with the full route map from the AgCore reference, including caching, rate limiting, validation, logging, metrics, and admin sub-routes.
+   - Port the agriculture helpers (field operation guidance, precision requirement metadata) so `/gnss/agriculture/**` endpoints continue returning enriched recommendations.
+   - Publish an OpenAPI spec covering every endpoint so the marketing app can generate typed clients.
 
-Deliverable: Authenticated GNSS API backed by Supabase/WorkOS, exposing both public and user-specific capabilities.
+5. **WorkOS Authentication & Access Modes**
+   - Embed WorkOS session + organization validation middleware modeled after `middleware.APIKeyOrSessionMiddleware`, sourcing JWKS/workspace IDs from this repo’s env config.
+   - Gate saved data/admin endpoints behind WorkOS sessions while keeping satellite/coverage/DOP/TEC reads available via signed API key + rate limiting for anonymous usage.
+
+6. **Saved Data & Alerts**
+   - Design Supabase tables (`users`, `saved_locations`, `alert_rules`, `alert_events`, `notification_queue`).
+   - Add CRUD handlers for `/api/v1/gnss/locations` and `/api/v1/gnss/alerts`, leveraging WorkOS identity to scope data per org.
+   - Extend the scheduler to evaluate alert thresholds (PDOP spikes, TEC risk, provider outages) and enqueue notification jobs (email/SMS) for a future notification worker.
+
+7. **Background Processing & Admin Hooks**
+   - Rebuild the batch scheduler, TLE/TEC processors, and failure recovery manager so timed jobs run via goroutines with context cancellation and expose status via `/gnss/status`, `/gnss/health`, and `/gnss/providers/status`.
+   - Support `/gnss/admin/batch/trigger/*` endpoints for manual refreshes, mirroring AgCore’s admin workflows.
+
+8. **Infrastructure & CI**
+   - Add Dockerfile + compose stack to run the Go API, a Supabase-compatible Postgres/Timescale instance, and Redis locally.
+   - Update repo-level CI to execute `go test ./...`, `golangci-lint`, Supabase migrations, and container builds, then publish the API image alongside the marketing frontend artifacts.
+
+Deliverable: A self-contained CoastalPASS GNSS backend living in this repository, aligned with Supabase + WorkOS from day one and feature-parity with the AgCore GNSS Planning services.
 
 ---
 
