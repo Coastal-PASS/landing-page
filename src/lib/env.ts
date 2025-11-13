@@ -9,18 +9,14 @@ const envSchema = z.object({
 });
 
 const resolveNetlifyUrl = (): string | undefined =>
-  process.env.DEPLOY_PRIME_URL ??
-  process.env.DEPLOY_URL ??
-  process.env.URL;
+  process.env.DEPLOY_PRIME_URL ?? process.env.DEPLOY_URL ?? process.env.URL;
 
 const fallbackAppUrl =
   process.env.NEXT_PUBLIC_APP_URL ??
   resolveNetlifyUrl() ??
   "http://localhost:3000";
 
-const fallbackNextAuthUrl =
-  process.env.NEXTAUTH_URL ??
-  fallbackAppUrl;
+const fallbackNextAuthUrl = process.env.NEXTAUTH_URL ?? fallbackAppUrl;
 
 export const env = envSchema.parse({
   NODE_ENV: process.env.NODE_ENV,

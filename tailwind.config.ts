@@ -57,11 +57,11 @@ const config: Config = {
           primary: '#0c2c94',
           accent: '#f5c400',
           highlight: '#8ea1c6',
-          neutral: '#6c7484',
+          neutral: '#4a5568',
           wash: '#dfe7f7',
           destructive: '#c75c02',
           heading: '#101a29',
-          body: '#6c7484',
+          body: '#4a5568',
         },
         surface: {
           muted: '#dfe7f7',

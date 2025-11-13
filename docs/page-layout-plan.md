@@ -127,3 +127,28 @@ Apply consistent structure using content files:
 4. Ensure each section references the exact copy blocks from the corresponding `docs/content-rewrite/*.md` file; adjust only for length/UX.
 5. Validate on mobile + desktop, keeping sections under 200 lines of JSX and files under 500 lines as per AGENTS.md.
 
+### Route + Asset Reference (slug/CTA map)
+
+| Nav Label | Route | Slug (if applicable) | Source Doc | Hero Media asset | Primary CTA |
+| --- | --- | --- | --- | --- | --- |
+| Home | `/` | `home` | `docs/content-rewrite/home_v2.md` | `/assets/img/ct/hero.jpg` | `Talk with our team` → `/contact` |
+| About Us | `/about` | `about` | `docs/content-rewrite/about_page.md` | `/assets/img/about/3.png` | `Meet the team` → `/contact?context=about` |
+| Services | `/services` | `services` | `docs/page-layout-plan.md` + `docs/content-rewrite/services*.md` | `/assets/img/service/1.png` | `Book a consultation` → `/contact?context=services` |
+| Fleet Telematics | `/services/fleet-telematics` | `fleet-telematics` | `docs/content-rewrite/services_fleet_telematics.md` | `/assets/img/service/2.png` | `Talk with our team` → `/contact?context=fleet-telematics` |
+| Water Management & Field Leveling | `/services/water-management` | `water-management` | `docs/content-rewrite/services-water-management.md` | `/assets/img/service/3.png` | `Schedule a survey` → `/contact?context=water-management` |
+| Seeding & Rate Control | `/services/seeding-and-rate-control` | `seeding-and-rate-control` | `docs/content-rewrite/services-seeding-and-rate-control.md` | `/assets/img/service/4.png` | `Talk with our team` → `/contact?context=seeding` |
+| Application Control | `/services/application-control` | `application-control` | `docs/content-rewrite/services-application-control.md` | `/assets/img/service/5.png` | `Talk with our team` → `/contact?context=application-control` |
+| Sprayer Retrofits | `/services/sprayer-retrofits` | `sprayer-retrofits` | `docs/content-rewrite/services-retrofits.md` | `/assets/img/service/6.png` | `Talk with our team` → `/contact?context=retrofits` |
+| AgTech Consulting & Integrations | `/services/agtech-consulting` | `agtech-consulting` | `docs/content-rewrite/services-consulting.md` | `/assets/img/service/7.png` | `Start a consultation` → `/contact?context=consulting` |
+| Products | `/products` | `products` | `docs/content-rewrite/products-*.md` | `/assets/img/banner-2/1.png` | `Browse hardware` → `/contact?context=products` |
+| Trimble Precision Ag Systems | `/products/trimble` | `trimble` | `docs/content-rewrite/products-trimble.md` | `/assets/img/banner-2/2.png` | `Talk with a Trimble specialist` → `/contact?context=trimble` |
+| Raven Precision Systems | `/products/raven` | `raven` | `docs/content-rewrite/products-raven.md` | `/assets/img/banner-2/3.png` | `Talk with our team` → `/contact?context=raven` |
+| Ecorobotix ARA | `/products/ecorobotix` | `ecorobotix` | `docs/content-rewrite/products-ecorobotix.md` | `/assets/img/banner-2/4.png` | `Learn more` → `/contact?context=ecorobotix` |
+| Coastal PASS RTK+ Network (Beta) | `/products/rtk-plus` | `rtk-plus` | `docs/content-rewrite/products-rtk-beta.md` | `/assets/img/banner-2/5.png` | `Request early access` → `/contact?context=rtk-plus` |
+| AgSupport Platform (Beta) | `/products/agcore` | `agcore` | `docs/content-rewrite/products-agcore.md` | `/assets/img/banner-3/1.png` | `Join the beta list` → `/contact?context=agsupport` |
+| Dealership Partner Program | `/partner-program` | `partner-program` | `docs/content-rewrite/dealers-partner-program.md` | `/assets/img/ct/jake_barn.png` | `Become a partner` → `/contact?context=partner` |
+| Raven Air Blast Experience | `/raven-air-blast` | `raven-air-blast` | `docs/content-rewrite/raven_page.md` | `/assets/img/raven-brocure/sprayer.jpg` | `Talk with Raven specialists` → `/contact?context=raven-air-blast` |
+| Contact | `/contact` | `contact` | contact hero copy (existing page) | `/assets/img/ct/trucks.png` | `Send message` → embedded `ContactForm` |
+| Privacy | `/privacy` | `privacy` | existing copy | `/assets/img/icon/lock.png` | `Contact us about privacy` → `/contact?context=privacy` |
+
+**CTA Context Query Params:** All inline “Talk with our team” buttons should append `?context={slug}` when linking to `/contact` so the `ContactForm` hidden field can capture originating interest. Reuse the slug column values (e.g., `context=fleet-telematics`, `context=rtk-plus`).

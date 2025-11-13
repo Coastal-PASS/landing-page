@@ -5,20 +5,34 @@ Use this checklist after running automated validation to document manual results
 ## Routes & Expected States
 
 1. `/` (desktop + mobile)
-   - Hero banner renders CTA buttons (Get In Touch, Watch Video) and opens dialog.
-   - Service Area cards show six offerings and partner logos.
-   - Why Choose section displays three reasons with correct copy.
-2. `/contact`
-   - Contact tiles link out correctly (`tel:`, `mailto:`, Maps URL).
-   - Contact form validation messages appear for empty submission and success message appears after valid submission.
-3. `/privacy`
-   - Headings and lists render with Tailwind typography classes; external links open in new tab.
-4. `/raven-air-blast`
-   - Hero shows kicker/title, imagery, and logos.
-   - Tractor option cards display CR7 and Viper 4+ copy.
-   - Contact strip links (website/Instagram/phone) are functional.
-5. `/auth/callback`
-   - Confirmation message appears, with links back to Home and Contact.
+   - Hero renders blueprint copy and CTA buttons (Talk with our team, Watch overview) with video overlay.
+   - Services grid lists six service pillars with “View details” chips.
+   - Beta highlight cards display AgSupport + RTK status pills.
+   - Contact CTA at bottom embeds the form and shows phone/email chips.
+2. `/about`
+   - Timeline renders 1971 → Today steps.
+   - Location cards show Salinas, King City, and Paso Robles with map links.
+3. `/services`
+   - Dropdown chips for each service route link to corresponding detail pages.
+   - Process section shows Assess → Integrate → Support steps.
+4. `/services/fleet-telematics` (spot-check additional slugs)
+   - Hero copy/imagery match blueprint, CTA points to `/contact?context=fleet-telematics`.
+   - Detail nav chips show “Perfect for” audiences.
+5. `/products`
+   - Product cards list five offerings with comparison table showing status column.
+6. `/products/trimble` (spot-check additional slugs)
+   - Compatibility chips list supported fleets; CTA links to `/contact?context=trimble`.
+7. `/partner-program`
+   - “What your customers get” and “What your dealership gets” grids render with copy + icons.
+8. `/raven-air-blast`
+   - Existing brochure sections render plus Contact CTA context `raven`.
+9. `/contact`
+   - Hero matches blueprint, quick contact cards link correctly, embedded form submits and shows success copy.
+10. `/privacy`
+    - Hero + detail nav render; full policy article displays legacy text; contact CTA uses privacy context.
+11. Navigation (desktop + mobile)
+    - Services/Products dropdowns reveal child links (Fleet Telematics, Trimble, etc.).
+    - Active route state highlights the current page.
 
 ## Screenshot Guidance
 

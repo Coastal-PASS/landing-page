@@ -1,25 +1,38 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState, type ReactElement } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 
 import { contactFormSchema, type ContactFormData } from "../schemas/form";
+
+interface ContactFormProps {
+  readonly variant?: "default" | "embedded";
+  readonly context?: string;
+  readonly successCopy?: string;
+}
 
 /**
  * Validated contact form used on the marketing site.
  */
-export const ContactForm = (): ReactElement => {
+export const ContactForm = ({
+  variant = "default",
+  context = "general",
+  successCopy = "Thanks! We will be in touch within one business day.",
+}: ContactFormProps): ReactElement => {
   const [status, setStatus] = useState<"idle" | "success">("idle");
+  const isEmbedded = variant === "embedded";
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactFormSchema),
@@ -28,9 +41,14 @@ export const ContactForm = (): ReactElement => {
       email: "",
       phone: "",
       message: "",
+      context,
     },
     mode: "onBlur",
   });
+
+  useEffect(() => {
+    setValue("context", context);
+  }, [context, setValue]);
 
   const onSubmit = async (data: ContactFormData): Promise<void> => {
     setStatus("idle");
@@ -43,7 +61,13 @@ export const ContactForm = (): ReactElement => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6" noValidate>
-      <div className="grid gap-4 md:grid-cols-2">
+      <input type="hidden" {...register("context")} value={context} />
+      <div
+        className={cn(
+          "grid gap-4",
+          isEmbedded ? "md:grid-cols-1" : "md:grid-cols-2",
+        )}
+      >
         <Field label="Name" name="contact-name" error={errors.name?.message}>
           {(fieldId) => (
             <Input
@@ -102,7 +126,7 @@ export const ContactForm = (): ReactElement => {
         </Button>
         {status === "success" ? (
           <p className="text-sm font-semibold text-brand-primary">
-            Thanks! We will be in touch within one business day.
+            {successCopy}
           </p>
         ) : null}
       </div>

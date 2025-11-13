@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { Navbar } from "../Navbar";
 
 describe("Navbar", () => {
-  it("renders primary navigation links", () => {
+  it("renders configured top-level nav links", () => {
     render(<Navbar />);
     const primaryNav = screen.getByRole("navigation", {
       name: /primary navigation/i,
@@ -15,10 +15,22 @@ describe("Navbar", () => {
       "href",
       "/",
     );
-    expect(scoped.getByRole("link", { name: /raven/i })).toHaveAttribute(
+    expect(scoped.getByRole("link", { name: /about/i })).toHaveAttribute(
       "href",
-      "/raven-air-blast",
+      "/about",
     );
+  });
+
+  it("reveals service detail links from the dropdown", async () => {
+    const user = userEvent.setup();
+    render(<Navbar />);
+
+    const servicesTrigger = screen.getByRole("button", { name: /services/i });
+    await user.click(servicesTrigger);
+
+    expect(
+      await screen.findByRole("link", { name: /fleet telematics/i }),
+    ).toBeVisible();
   });
 
   it("opens the mobile sheet when the menu button is pressed", async () => {
@@ -31,7 +43,10 @@ describe("Navbar", () => {
       screen.getByRole("navigation", { name: /mobile navigation/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getAllByRole("link", { name: /contact us/i })[0],
+      screen.getByRole("link", { name: /contact us/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /fleet telematics/i }),
     ).toBeInTheDocument();
   });
 });

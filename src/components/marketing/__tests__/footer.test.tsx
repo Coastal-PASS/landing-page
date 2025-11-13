@@ -5,12 +5,15 @@ import { Footer } from "../Footer";
 
 describe("Footer", () => {
   it("renders contact information and navigation links", () => {
-    render(<Footer />);
+    render(<Footer />); 
 
     expect(screen.getByText(/831-612-pass/i)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /contact/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /privacy policy/i })).toHaveAttribute(
       "href",
-      "/contact",
+      "/privacy",
     );
+    expect(
+      screen.getByRole("link", { name: /fleet telematics/i }),
+    ).toHaveAttribute("href", "/services/fleet-telematics");
   });
 });
