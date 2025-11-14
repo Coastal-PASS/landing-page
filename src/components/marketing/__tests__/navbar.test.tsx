@@ -1,4 +1,9 @@
-import { render, screen, within } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+  within,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 
@@ -48,5 +53,23 @@ describe("Navbar", () => {
     expect(
       screen.getByRole("link", { name: /fleet telematics/i }),
     ).toBeInTheDocument();
+  });
+
+  it("closes the mobile sheet after navigating via a child link", async () => {
+    const user = userEvent.setup();
+    render(<Navbar />);
+
+    await user.click(screen.getByLabelText(/open navigation menu/i));
+
+    const mobileNav = screen.getByRole("navigation", { name: /mobile navigation/i });
+    const fleetTelematicsLink = within(mobileNav).getByRole("link", {
+      name: /fleet telematics/i,
+    });
+
+    await user.click(fleetTelematicsLink);
+
+    await waitForElementToBeRemoved(() =>
+      screen.queryByRole("navigation", { name: /mobile navigation/i }),
+    );
   });
 });
